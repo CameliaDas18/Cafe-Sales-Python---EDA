@@ -1,0 +1,65 @@
+Data Cleaning and Preprocessing Findings:
+1.	Initial Data Inspection:
+  o	The dataset contained 10,000 rows and was initially inspected using df.info().
+    Upon reviewing, it was found that all columns, both numerical and non-numerical, were stored as "object" data types, 
+  which is not typical for a dataset containing numerical columns. Ideally, numerical columns like Quantity, Price per Unit, 
+  and Total Spent should have data types such as int64 or float64, while non-numerical columns like Item, Location, and 
+  Payment Method should be categorized as object or category.
+2.	Handling Missing Data:
+  o	Several columns had missing values:
+    	Item: 333 missing values
+    	Quantity: 138 missing values
+    	Price Per Unit: 179 missing values
+    	Total Spent: 173 missing values
+    	Payment Method: 2579 missing values
+    	Location: 3265 missing values
+    	Transaction Date: 159 missing values
+  o	Upon further inspection, it was noticed that in addition to the missing values, certain entries in columns like Item, Quantity, and Location were labeled as 'error' and 'unknown'. These non-standard entries were treated as missing values and replaced with NaN for consistency across the dataset.
+3.	Data Type Conversion:
+  o	To ensure proper handling of the data, a copy of the dataset was created. The non-numerical columns were retained as object or category types, while numerical columns such as Price per Unit, Quantity, and Total Spent were converted to appropriate data types like float64 or int64.
+4.	Handling Missing Values (Imputation):
+  o	The missing values were addressed in the following manner:
+    	Price per Unit: Missing values were filled with the mean of the column. The mean value was chosen as it represents the central tendency of the data and avoids the introduction of values that might skew the distribution.
+    	Total Spent: The missing values in the Total Spent column were filled after imputing Price per Unit. This approach helped maintain consistency between the price and total spent.
+    	Quantity: The missing values in Quantity were filled.
+    	Item: The missing values in the Item column were filled by first filling in the Quantity, then the Price per Unit and Total Spent. If an item could not be recovered, those rows were dropped.
+    	Location and Payment Method: For the Location and Payment Method columns, missing values were filled with the mode (the most frequent value) to ensure consistency with the most common entry.
+    	Transaction Date: The missing Transaction Date values were filled with the last known valid date, assuming that any missing date occurred after a previous valid entry.
+5.	Final Data Cleanup:
+  o	After imputation, any remaining rows with null values in the Item column (which could not be recovered) were dropped. This helped ensure that only valid and complete entries remained for analysis.
+6.	Date Conversion:
+  o	The Transaction Date column was converted to the datetime format, which is crucial for performing time-based analysis and visualizations, such as monthly trends in sales.
+Conclusion:
+By applying these cleaning and preprocessing steps, we ensured that the dataset was consistent, with no erroneous values, missing data, or incorrect data types. These steps helped make the data suitable for further analysis and visualization. Handling missing data with the mean and mode helped preserve the integrity of the dataset without distorting its overall distribution, which is essential for accurate and meaningful insights.
+
+
+Findings from the Dirty Cafe Sales Analysis:
+1.	Total Number of Transactions:
+  o	The dataset contains a total of 9994 unique transactions, reflecting the overall number of customer purchases during the analyzed period.
+2.	Monthly Sales Overtime:
+  o	November showed the highest sales, with a total of 7750.5, indicating a strong performance for the month.
+  o	March, on the other hand, showed a decline in sales with only 6934, suggesting a possible seasonal dip or the need for promotional activities during that time.
+3.	Total Income by Location:
+  o	The Takeaway location generated the highest revenue, contributing a total of 62004 to the overall sales. This insight highlights the importance of focusing on the takeaway service.
+  o	Other locations can be analyzed for optimization to boost their sales.
+4.	Top Items by Revenue:
+  o	Salad was the highest revenue-generating item, with a total of 19125.
+  o	Tea also contributed significantly to the revenue, bringing in 5479.5.
+  o	These insights can inform inventory decisions, focusing on the most profitable items.
+5.	Number of Transactions per Payment Method:
+  o	The Digital Wallet payment method was the most used, contributing to a large portion of the total transactions. This suggests that customers prefer digital payment options, and the cafe could consider enhancing these methods.
+6.	Total Revenue Generated:
+  o	The total revenue generated from all transactions was 89220.5, representing the cafe's overall income during the given time period.
+7.	Top Selling Items by Quantity Sold:
+  o	Juice was the most sold item, with a total quantity of 4271 units, showing high customer demand.
+  o	Smoothie had the lowest quantity sold, with only 3342 units. This could indicate an opportunity to promote smoothies or adjust the offering.
+8.	Top Income Generating Items:
+  o	Salad remained the top income-generating item with 19125 in revenue, confirming its popularity and profitability.
+  o	Tea also stood out with revenue of 5479.5, contributing positively to the overall income.
+Key Takeaways:
+•	The cafe can focus on promoting Takeaway services and explore strategies to boost March sales by applying discounts.
+•	High-revenue items like Salad and Tea should continue to be emphasized, while Smoothies might need additional marketing efforts to increase sales.
+•	Given that Digital Wallet is the most popular payment method, the cafe should continue to optimize the checkout process for digital payments. Offering exclusive discounts or loyalty points for digital wallet payments could encourage more customers to use this convenient method. Additionally, the cafe might consider introducing more digital payment options if customer demand shifts toward other types of mobile payment systems.
+•	More flavors can be added in the menu. 
+•	Combos can be added in the menu.
+
